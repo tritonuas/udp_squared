@@ -24,6 +24,12 @@ enum header {
 };
 typedef enum header header_t;
 
+enum drop_mode {
+    GUIDED = 1,
+    UNGUIDED = 2
+};
+typedef enum drop_mode drop_mode_t;
+
 enum bottle {
     A = 1,
     B, C, D, E
