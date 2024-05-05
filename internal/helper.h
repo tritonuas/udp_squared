@@ -33,6 +33,13 @@ uint8_t makeID(bottle_t payloadID, payload_state_t state) {
     return (((uint8_t)(payloadID) << 3) | (uint8_t)(state));
 }
 
+packet_t makeDropNowPacket(bottle_t bottle) {
+    packet_t p;
+    p.header = (uint8_t) DROP_NOW;
+    p.id     = (uint8_t) bottle;
+    return p;
+}
+
 /*
     Makes a reset packet to send to a specific bottle.
 
