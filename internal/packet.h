@@ -1,5 +1,5 @@
 #ifndef INCLUDE_PACKET_H_
-#define INCLUDE_PACKET_H
+#define INCLUDE_PACKET_H_
 
 #include <stdint.h>
 
