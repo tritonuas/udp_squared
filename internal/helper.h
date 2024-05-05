@@ -2,6 +2,7 @@
 #define HELPER_H_
 
 #include <stdint.h>
+#include <assert.h>
 
 #include "packet.h"
 #include "enum.h"
@@ -47,6 +48,8 @@ packet_t makeResetPacket(bottle_t bottle) {
 mode_packet_t makeModePacket(header_t header, bottle_t payloadID,
     payload_state_t state, drop_mode_t mode)
 {
+    assert(header == ACK_MODE || header == SET_MODE);
+
     mode_packet_t p;
     p.header  = (uint8_t) header;
     p.id      = makeID(payloadID, state);
@@ -55,6 +58,43 @@ mode_packet_t makeModePacket(header_t header, bottle_t payloadID,
     return p;
 }
 
-// TODO: make more helper functions
+heartbeat_packet_t makeHeartbeatPacket(bottle_t payloadID, payload_state_t state,
+    float payload_lat, float payload_lng, uint16_t volts, uint16_t altitude_m)
+{
+    heartbeat_packet_t p;
+    p.header = (uint8_t) HEARTBEAT;
+    p.id = makeID(payloadID, state);
+    p.payload_lat = payload_lat;
+    p.payload_lng = payload_lng;
+    p.volts = volts;
+    p.altitude_m = altitude_m;
+    return p;
+}
 
-#endif HELPER_H_
+latlng_packet_t makeLatLngPacket(header_t header, bottle_t payloadID, payload_state_t state,
+    float drop_lat, float drop_lng, uint32_t curr_alt_m)
+{
+    assert(header == SEND_LATLNG || header == ACK_LATLNG);
+
+    latlng_packet_t p;
+    p.header = (uint8_t) header;
+    p.id = makeID(payloadID, state);
+    p.drop_lat = drop_lat;
+    p.drop_lng = drop_lng;
+    p.curr_alt_m = curr_alt_m;
+    return p;
+}
+
+arm_packet_t makeArmPacket(header_t header, bottle_t payloadID, payload_state_t state, uint32_t curr_alt_m) {
+    assert(header == ACK_ARM || header == ACK_DISARM ||
+        header == ARM || header == DISARM);
+
+    arm_packet_t p;
+    p.header = (uint8_t) header;
+    p.id = makeID(payloadID, state);
+    p.curr_alt_m = curr_alt_m;
+    return p;
+}
+
+
+#endif  // HELPER_H_
