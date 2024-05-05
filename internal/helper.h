@@ -52,54 +52,58 @@ packet_t makeResetPacket(bottle_t bottle) {
     return p;
 }
 
-mode_packet_t makeModePacket(header_t header, bottle_t payloadID,
+packet_t makeModePacket(header_t header, bottle_t payloadID,
     payload_state_t state, drop_mode_t mode)
 {
     assert(header == ACK_MODE || header == SET_MODE);
 
-    mode_packet_t p;
-    p.header  = (uint8_t) header;
-    p.id      = makeID(payloadID, state);
-    p.mode    = (uint8_t) mode;
-    p.version = (uint8_t) PROTOCOL_VERSION;
-    return p;
+    packet_t p;
+    mode_packet_t* p_mode = (mode_packet_t*)(&p);
+    p_mode->header  = (uint8_t) header;
+    p_mode->id      = makeID(payloadID, state);
+    p_mode->mode    = (uint8_t) mode;
+    p_mode->version = (uint8_t) PROTOCOL_VERSION;
+    return (p);
 }
 
-heartbeat_packet_t makeHeartbeatPacket(bottle_t payloadID, payload_state_t state,
+packet_t makeHeartbeatPacket(bottle_t payloadID, payload_state_t state,
     float payload_lat, float payload_lng, uint16_t volts, uint16_t altitude_m)
 {
-    heartbeat_packet_t p;
-    p.header = (uint8_t) HEARTBEAT;
-    p.id = makeID(payloadID, state);
-    p.payload_lat = payload_lat;
-    p.payload_lng = payload_lng;
-    p.volts = volts;
-    p.altitude_m = altitude_m;
+    packet_t p;
+    heartbeat_packet_t* p_hb = (heartbeat_packet_t*)(&p);
+    p_hb->header = (uint8_t) HEARTBEAT;
+    p_hb->id = makeID(payloadID, state);
+    p_hb->payload_lat = payload_lat;
+    p_hb->payload_lng = payload_lng;
+    p_hb->volts = volts;
+    p_hb->altitude_m = altitude_m;
     return p;
 }
 
-latlng_packet_t makeLatLngPacket(header_t header, bottle_t payloadID, payload_state_t state,
+packet_t makeLatLngPacket(header_t header, bottle_t payloadID, payload_state_t state,
     float drop_lat, float drop_lng, uint32_t curr_alt_m)
 {
     assert(header == SEND_LATLNG || header == ACK_LATLNG);
 
-    latlng_packet_t p;
-    p.header = (uint8_t) header;
-    p.id = makeID(payloadID, state);
-    p.drop_lat = drop_lat;
-    p.drop_lng = drop_lng;
-    p.curr_alt_m = curr_alt_m;
+    packet_t p;
+    latlng_packet_t* p_ll = (latlng_packet_t*)(&p);
+    p_ll->header = (uint8_t) header;
+    p_ll->id = makeID(payloadID, state);
+    p_ll->drop_lat = drop_lat;
+    p_ll->drop_lng = drop_lng;
+    p_ll->curr_alt_m = curr_alt_m;
     return p;
 }
 
-arm_packet_t makeArmPacket(header_t header, bottle_t payloadID, payload_state_t state, uint32_t curr_alt_m) {
+packet_t makeArmPacket(header_t header, bottle_t payloadID, payload_state_t state, uint32_t curr_alt_m) {
     assert(header == ACK_ARM || header == ACK_DISARM ||
         header == ARM || header == DISARM);
 
-    arm_packet_t p;
-    p.header = (uint8_t) header;
-    p.id = makeID(payloadID, state);
-    p.curr_alt_m = curr_alt_m;
+    packet_t p;
+    arm_packet_t* p_arm = (arm_packet_t*)(&p);
+    p_arm->header = (uint8_t) header;
+    p_arm->id = makeID(payloadID, state);
+    p_arm->curr_alt_m = curr_alt_m;
     return p;
 }
 
