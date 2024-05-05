@@ -31,8 +31,11 @@ enum drop_mode {
 typedef enum drop_mode drop_mode_t;
 
 enum bottle {
-    A = 1,
-    B, C, D, E
+    UDP2_A = 1,
+    UDP2_B, 
+    UDP2_C, 
+    UDP2_D, 
+    UDP2_E
 };
 typedef enum bottle bottle_t;
 
