@@ -37,7 +37,7 @@ enum bottle {
 typedef enum bottle bottle_t;
 
 enum payload_state {
-    NULL = 0 // Sent by the OBC, does not map to any state on the payload
+    OBC_NULL = 0 // Sent by the OBC, does not map to any state on the payload
 };
 typedef enum payload_state payload_state_t;
 
