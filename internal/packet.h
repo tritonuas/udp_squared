@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 
-#define PROTOCOL_VERSION 1
 #define PACKET_SIZE_B 14
 
 /*
