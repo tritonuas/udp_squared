@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#define UDP2_VERSION 1
 #define PACKET_SIZE_B 14
 
 /*

@@ -39,7 +39,7 @@ packet_t makeModePacket(header_t header, bottle_t payloadID,
     p_mode->header  = (uint8_t) header;
     p_mode->id      = makeID(payloadID, state);
     p_mode->mode    = (uint8_t) mode;
-    p_mode->version = (uint8_t) PROTOCOL_VERSION;
+    p_mode->version = (uint8_t) UDP2_VERSION;
     return (p);
 }
 
