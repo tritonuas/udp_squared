@@ -25,7 +25,7 @@ void parseID(uint8_t id, uint8_t* payloadID, uint8_t* state);
     manipulation to fit them in the same byte, according to the schema
     specified above.
 */
-uint8_t makeID(bottle_t payloadID, payload_state_t state);
+extern "C" uint8_t makeID(bottle_t payloadID, payload_state_t state);
 
 /*
     Makes a packet to tell a payload to drop all now
