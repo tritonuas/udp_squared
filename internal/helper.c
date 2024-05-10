@@ -11,7 +11,7 @@ void parseID(uint8_t id, uint8_t* payloadID, uint8_t* state) {
     *state  = (id & 0b00000111);
 }
 
-uint8_t makeID(bottle_t payloadID, payload_state_t state) {
+extern "C" uint8_t makeID(bottle_t payloadID, payload_state_t state) {
     return (((uint8_t)(payloadID) << 3) | (uint8_t)(state));
 }
 
