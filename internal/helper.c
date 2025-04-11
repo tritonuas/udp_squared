@@ -11,25 +11,25 @@ void parseID(uint8_t id, uint8_t* payloadID, uint8_t* state) {
     *state  = (id & 0b00000111);
 }
 
-uint8_t makeID(bottle_t payloadID, payload_state_t state) {
+uint8_t makeID(airdrop_t payloadID, payload_state_t state) {
     return (((uint8_t)(payloadID) << 3) | (uint8_t)(state));
 }
 
-packet_t makeDropNowPacket(bottle_t bottle) {
+packet_t makeDropNowPacket(airdrop_t airdrop) {
     packet_t p;
     p.header = (uint8_t) DROP_NOW;
-    p.id     = makeID(bottle, OBC_NULL);
+    p.id     = makeID(airdrop, OBC_NULL);
     return p;
 }
 
-packet_t makeResetPacket(bottle_t bottle) {
+packet_t makeResetPacket(airdrop_t airdrop) {
     packet_t p;
     p.header = (uint8_t) RESET;
-    p.id     = makeID(bottle, OBC_NULL);
+    p.id     = makeID(airdrop, OBC_NULL);
     return p;
 }
 
-packet_t makeModePacket(header_t header, bottle_t payloadID,
+packet_t makeModePacket(header_t header, airdrop_t payloadID,
     payload_state_t state, drop_mode_t mode)
 {
     assert(header == ACK_MODE || header == SET_MODE);
@@ -43,7 +43,7 @@ packet_t makeModePacket(header_t header, bottle_t payloadID,
     return (p);
 }
 
-packet_t makeHeartbeatPacket(bottle_t payloadID, payload_state_t state,
+packet_t makeHeartbeatPacket(airdrop_t payloadID, payload_state_t state,
     float payload_lat, float payload_lng, uint16_t volts, uint16_t altitude_m)
 {
     packet_t p;
@@ -57,7 +57,7 @@ packet_t makeHeartbeatPacket(bottle_t payloadID, payload_state_t state,
     return p;
 }
 
-packet_t makeLatLngPacket(header_t header, bottle_t payloadID, payload_state_t state,
+packet_t makeLatLngPacket(header_t header, airdrop_t payloadID, payload_state_t state,
     float drop_lat, float drop_lng, uint32_t curr_alt_m)
 {
     assert(header == SEND_LATLNG || header == ACK_LATLNG);
@@ -72,7 +72,7 @@ packet_t makeLatLngPacket(header_t header, bottle_t payloadID, payload_state_t s
     return p;
 }
 
-packet_t makeArmPacket(header_t header, bottle_t payloadID, payload_state_t state, uint32_t curr_alt_m) {
+packet_t makeArmPacket(header_t header, airdrop_t payloadID, payload_state_t state, uint32_t curr_alt_m) {
     assert(header == ACK_ARM || header == ACK_DISARM ||
         header == ARM || header == DISARM);
 

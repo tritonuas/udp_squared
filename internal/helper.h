@@ -25,29 +25,29 @@ void parseID(uint8_t id, uint8_t* payloadID, uint8_t* state);
     manipulation to fit them in the same byte, according to the schema
     specified above.
 */
-uint8_t makeID(bottle_t payloadID, payload_state_t state);
+uint8_t makeID(airdrop_t payloadID, payload_state_t state);
 
 /*
     Makes a packet to tell a payload to drop all now
 */
-packet_t makeDropNowPacket(bottle_t bottle);
+packet_t makeDropNowPacket(airdrop_t airdrop);
 
 /*
     Makes a reset packet to send to a specific bottle.
 
     Used by the OBC to create a RESET packet
 */
-packet_t makeResetPacket(bottle_t bottle);
+packet_t makeResetPacket(airdrop_t airdrop);
 
-packet_t makeModePacket(header_t header, bottle_t payloadID,
+packet_t makeModePacket(header_t header, airdrop_t payloadID,
     payload_state_t state, drop_mode_t mode);
 
-packet_t makeHeartbeatPacket(bottle_t payloadID, payload_state_t state,
+packet_t makeHeartbeatPacket(airdrop_t payloadID, payload_state_t state,
     float payload_lat, float payload_lng, uint16_t volts, uint16_t altitude_m);
 
-packet_t makeLatLngPacket(header_t header, bottle_t payloadID, payload_state_t state,
+packet_t makeLatLngPacket(header_t header, airdrop_t payloadID, payload_state_t state,
     float drop_lat, float drop_lng, uint32_t curr_alt_m);
 
-packet_t makeArmPacket(header_t header, bottle_t payloadID, payload_state_t state, uint32_t curr_alt_m);
+packet_t makeArmPacket(header_t header, airdrop_t payloadID, payload_state_t state, uint32_t curr_alt_m);
 
 #endif  // HELPER_H_
