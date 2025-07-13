@@ -30,16 +30,15 @@ enum drop_mode {
 };
 typedef enum drop_mode drop_mode_t;
 
-enum bottle {
+enum airdrop {
     UDP2_A = 1,
     UDP2_B = 2,
     UDP2_C = 3,
     UDP2_D = 4, 
-    UDP2_E = 5,
     UDP2_ALL = 7
     // note max 3 bits for this value
 };
-typedef enum bottle bottle_t;
+typedef enum airdrop airdrop_t;
 
 enum payload_state {
     OBC_NULL = 0, // Sent by the OBC, does not map to any state on the payload
