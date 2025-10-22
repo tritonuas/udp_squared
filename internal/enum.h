@@ -33,8 +33,6 @@ typedef enum drop_mode drop_mode_t;
 enum airdrop {
     UDP2_A = 1,
     UDP2_B = 2,
-    UDP2_C = 3,
-    UDP2_D = 4, 
     UDP2_ALL = 7
     // note max 3 bits for this value
 };
